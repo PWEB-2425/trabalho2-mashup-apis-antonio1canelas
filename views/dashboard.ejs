@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+<body>
+  <h1>Bem-vindo, <%= user.username %>!</h1>
+  <a href="/logout">Logout</a>
+
+  <h2>Pesquisar filme ou série:</h2>
+  <form method="POST" action="/search">
+    <input name="query" placeholder="Nome do filme ou série" required>
+    <button type="submit">Pesquisar</button>
+  </form>
+
+  <% if (error) { %>
+    <p style="color:red;"><%= error %></p>
+  <% } %>
+
+  <% if (data) { %>
+    <h3>🎬 <%= data.movie.title %> (<%= data.movie.release_date %>)</h3>
+    <% if (data.movie.poster_path) { %>
+      <img src="https://image.tmdb.org/t/p/w300<%= data.movie.poster_path %>" alt="Poster">
+    <% } %>
+    <p><strong>Resumo TMDB:</strong> <%= data.movie.overview %></p>
+
+    <h4>📚 Wikipedia:</h4>
+    <p><strong><%= data.wiki.title %></strong></p>
+    <p><%= data.wiki.extract %></p>
+  <% } %>
+
+
+  <% if (user.searches && user.searches.length > 0) { %>
+  <h3>📜 Histórico de Pesquisas:</h3>
+  <ul>
+    <% user.searches.slice().reverse().forEach(function(search) { %>
+      <li><%= search %></li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>Nenhuma pesquisa ainda.</p>
+<% } %>
+
+</body>
+</html>
