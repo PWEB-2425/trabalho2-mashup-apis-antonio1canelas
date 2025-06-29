@@ -1,18 +1,93 @@
-## Getting Started
+# Trabalho #2 - API MASHUP
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+##  Autor
+**António Pedro Magalhães Canelas**  
+**Número:** 31834
 
-## Folder Structure
+---
 
-The workspace contains two folders by default, where:
+## 📄 Descrição do Trabalho
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+Este projeto consiste numa aplicação web com autenticação que permite pesquisar filmes e séries, combinando informações de múltiplas APIs externas.
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+### O que faz:
+- Permite ao utilizador registar-se, fazer login e logout.
+- Pesquisar por filmes ou séries (mesmo com pequenos erros nos títulos).
+- Apresenta os dados recolhidos da **API TMDB** (título, imagem, data, resumo).
+- Mostra também um resumo da **Wikipedia**.
+- Guarda e apresenta o histórico de pesquisas de cada utilizador.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+---
 
-## Dependency Management
+##  Publicação Online
+O projeto está disponível aqui:  
+🔗 **[https://mashup-filmes-series.onrender.com](https://mashup-filmes-series.onrender.com)**
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+---
+
+## 🛠️ Como instalar e correr localmente
+
+### 1. Clonar o repositório:
+```bash
+git clone https://github.com/PWEB-2425/trabalho2-mashup-apis-antonio1canelas.git
+cd trabalho2-mashup-apis-antonio1canelas
+```
+
+### 2. Instalar dependências:
+```bash
+npm install
+```
+
+### 3. Criar ficheiro `.env` na raiz com:
+```env
+MONGO_URI=mongodb+srv://admin:admin@cluster0.dqzmlwx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+SESSION_SECRET=batatinha123segredo
+TMDB_API_KEY=1bb3ddba950835ceaef558913b653d59
+```
+
+### 4. Correr o servidor:
+```bash
+node server.js
+```
+
+---
+
+##  Descrição da Base de Dados (MongoDB)
+
+- Utiliza **MongoDB Atlas**.
+- Coleção `users`:
+  ```js
+  {
+    username: String,
+    password: String (hashed com bcrypt),
+    searches: [String] // histórico de pesquisas
+  }
+  ```
+
+---
+
+##  Descrição da Autenticação
+
+- Autenticação implementada com **Passport.js** e **session-based login**.
+- Passwords armazenadas com **bcrypt (hash)**.
+- Apenas utilizadores autenticados podem aceder à dashboard e pesquisar filmes/séries.
+
+---
+
+##  APIs Usadas
+
+- [TMDB API](https://www.themoviedb.org/documentation/api)
+- [Wikipedia REST API](https://en.wikipedia.org/api/rest_v1/)
+
+---
+
+##  Notas finais
+
+- O projeto foi desenvolvido com Node.js, Express e EJS.
+- O deploy foi feito com [Render.com](https://render.com).
+- Foram seguidas boas práticas de modularização (routes, models, views).
+- A aplicação é responsiva e testada com filmes e séries em português e inglês.
+
+---
+
+### ✅ Concluído com sucesso! 🚀
